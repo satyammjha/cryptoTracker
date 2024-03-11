@@ -11,6 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import images from '../../assets/img.jpg'
 
 const CryptoTable = () => {
 
@@ -93,15 +94,17 @@ const CryptoTable = () => {
           }}
         />
 
-        <Paper sx={{ width: '80%', overflow: 'hidden', marginLeft: '10%' }} style={{
+        {/* <Paper sx={{ width: '80%', overflow: 'hidden', marginLeft: '10%' }} style={{
           backgroundColor: 'black', color: 'white', scrollbarWidth: 'none'
         }}>
           <TableContainer sx={{ maxHeight: 440 }} style={{ scrollbarWidth: 'none', }}>
 
             {Loading ? <LinearProgress color="success" width={100} /> : <Table stickyHeader aria-label="sticky table" >
+
               <TableHead>
                 <TableRow>
                   {columns.map((column) => (
+
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -121,7 +124,7 @@ const CryptoTable = () => {
                           const value = row[column.id];
                           return (
                             <>
-                              <TableCell key={column.id} align={column.align} style={{ color: 'white' }}>
+                              <TableCell key={column.id} align={column.align} style={{ color: 'white', fontWeight: 'bold', width: '-100rem' }}>
                                 {column.id === 'coin' ? (
                                   <Link to={`/coins/${row.coin.id}`}>
                                     <img src={row.coin} alt={row.coin.name} height={30} width={30} />
@@ -143,8 +146,44 @@ const CryptoTable = () => {
               </TableBody>
             </Table>}
           </TableContainer>
-        </Paper>
-      </div>
+        </Paper> */}
+        <div className="container overflow-y-scroll no-scrollbar">
+          <div className="tableHead flex divide-x flex-row gap-36 ml-[20%] rounded-md" style={{ backgroundColor: 'goldenrod', width: '70vw', height: '30px' }}>
+
+
+            <span className="pl-6" >Coin</span>
+            <span className="pl-6 ">Price</span>
+            <span className="pl-3 ">24H Change</span>
+            <span className="pl-1 ">Market Cap</span>
+          </div>
+          {
+
+
+            Coins.map((coin, index) => {
+              return (
+                <>
+
+                  <div key={index} className="coinList  ml-[20%] rounded-md" style={{ backgroundColor: 'black', color: 'white', width: '70vw', height: '50px' }}>
+
+                    <Link to={`/coins/:${coin.id}`} style={{ marginBottom: '10px' }} className='flex divide-x flex-row gap-36'>
+                      <span className="pl-6 flex align-center gap-4"> <img src={coin.image} style={{ height: '30px', width: '3vw' }} />{coin.id}</span>
+                      <span className="pl-6" style={{ height: '30px', width: '3vw' }} >Price</span>
+                      <span className="pl-3 " style={{ height: '30px', width: '3vw' }} >24H Change</span>
+                      <span className="pl-1 " style={{ height: '30px', width: '3vw' }} >Market Cap</span>
+                    </Link>
+
+                    <hr />
+                  </div>
+                </>
+
+              )
+
+            })
+
+
+          }
+        </div>
+      </div >
     </>
   )
 }
